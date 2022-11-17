@@ -12,10 +12,21 @@ public class Student {
     private String name;
     private int age;
 
+    @OneToOne
+    private Avatar avatar;
     @ManyToOne
+    @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    public Student(Long id, String name, int age, Faculty faculty) {
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public Student(Long id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;

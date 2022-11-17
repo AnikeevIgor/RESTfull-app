@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Collection;
 
 public interface FacultyRepo extends JpaRepository<Faculty, Long> {
-    Collection<Faculty> findFacultiesByColorIgnoreCase(String color);
+    Collection<Faculty> findFacultiesByColorIgnoreCaseOrNameIgnoreCase(String color,String name);
 
 }

@@ -12,8 +12,14 @@ public class Faculty {
     private String name;
     private String color;
 
-    // @ManyToOne
-    // @JoinColumn(name = "student_id")
+  //  public List<Student> getStudents() {
+  //      return students;
+  //  }
+
+  //  public void setStudents(List<Student> students) {
+  //      this.students = students;
+  //  }
+
     @OneToMany(mappedBy = "faculty")
     private List<Student> students;
 

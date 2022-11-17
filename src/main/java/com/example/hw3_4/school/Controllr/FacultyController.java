@@ -48,17 +48,17 @@ public class FacultyController {
          facultyService.deleteFaculty(id);
          return ResponseEntity.ok().build();
     }
-  //  @GetMapping
-  //  public ResponseEntity<Collection<Faculty>> getAllFaculty(){
-  //      return  ResponseEntity.ok(facultyService.getAllFaculty());
-  //  }
-
-    @GetMapping(params = "color")
-    public ResponseEntity<Collection<Faculty>> findFacultiesByColorIgnoreCase(@RequestParam String color) {
-        return  ResponseEntity.ok(facultyService.findFacultiesByColorIgnoreCase(color));
+    @GetMapping
+    public ResponseEntity<Collection<Faculty>> getAllFaculty(){
+        return  ResponseEntity.ok(facultyService.getAllFaculty());
     }
- //  @GetMapping("/{id}/students")
- //  public ResponseEntity<Collection<Student>> getStudentsByFaculty(@PathVariable long id){
- //      return  ResponseEntity.ok(facultyService.getStudentsByfaculty(id));
- //  }
+
+   @GetMapping(params = "colorOrName")
+   public ResponseEntity<Collection<Faculty>> findFacultiesByColorIgnoreCaseOrNameIgnoreCase(@RequestParam String colorOrName) {
+       return  ResponseEntity.ok(facultyService.findFacultiesByColorIgnoreCaseOrNameIgnoreCase(colorOrName));
+   }
+ // @GetMapping("/{id}/students")
+ // public ResponseEntity<Collection<Student>> getStudentsByFaculty(@PathVariable long id){
+ //     return  ResponseEntity.ok(facultyService.getStudentByFaculty(id));
+ // }
 }

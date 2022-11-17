@@ -1,6 +1,7 @@
 package com.example.hw3_4.school.Controllr;
 
 
+import com.example.hw3_4.school.Model.Faculty;
 import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.Service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -49,17 +50,19 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    //  @GetMapping
-//  public ResponseEntity<Collection<Student>> getAllStudents(){
-//      return  ResponseEntity.ok(studentService.getAllStudents());
-//  }
     @GetMapping
-    public ResponseEntity<Collection<Student>> findStudentByAgeGreaterThan(@RequestParam int min, @RequestParam int max) {
-        return ResponseEntity.ok(studentService.findStudentByAgeGreaterThan(min, max));
+    public ResponseEntity<Collection<Student>> getAllStudents() {
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
 
-    //   @GetMapping("/{id}/faculty")
-    //   public ResponseEntity<Faculty> findStudentByFaculty(@PathVariable Long id) {
-    //       return ResponseEntity.ok(studentService.findStudentByFaculty(id));
-    //   }
+    @GetMapping(params = {"min", "max"})
+    public ResponseEntity<Collection<Student>> findStudentByAgeIsBetween(@RequestParam int min, @RequestParam int max) {
+        return ResponseEntity.ok(studentService.findStudentByAgeIsBetween(min, max));
+    }
+
+       @GetMapping("/{id}/faculty")
+       public ResponseEntity<Faculty> findStudentByFaculty(@PathVariable Long id) {
+           return ResponseEntity.ok(studentService.findStudentByFaculty(id));
+       }
+
 }
