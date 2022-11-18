@@ -2,22 +2,23 @@ package com.example.hw3_4.school.Service;
 
 
 import com.example.hw3_4.school.Model.Faculty;
+import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.repositories.FacultyRepo;
 import com.example.hw3_4.school.repositories.StudentRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 
 @Service
 public class FacultyService {
     private final FacultyRepo facultyRepo;
-    private final StudentRepo studentRepo;
 
 
-    public FacultyService(FacultyRepo facultyRepo, StudentRepo studentRepo) {
+
+    public FacultyService(FacultyRepo facultyRepo) {
         this.facultyRepo = facultyRepo;
-        this.studentRepo = studentRepo;
     }
 
     public Faculty createFaculty(Faculty faculty) {
@@ -43,12 +44,15 @@ public class FacultyService {
     public Collection<Faculty> findFacultiesByColorIgnoreCaseOrNameIgnoreCase(String colorOrName) {
         return facultyRepo.findFacultiesByColorIgnoreCaseOrNameIgnoreCase(colorOrName,colorOrName);
     }
+ //  public Collection<Student> getStudentByFaculty(Long id){
+ //     return facultyRepo.getById(id).getStudents();
+ //  }
 
-  //  public Collection<Student> getStudentByFaculty(long id){
-  //        return facultyRepo.findById(id)
-  //                .map(Faculty::getStudents)
-  //                .map(students-> students.stream()
-  //                        .collect(Collectors.toList()))
-  //                                ;
-  //  }
+    //  public Collection<Student> getStudentByFaculty(long id){
+        //        return facultyRepo.findById(id)
+                //                .map(Faculty::getStudents)
+                //                .map(students -> students.stream()
+                //                        .collect(Collectors.toList()))
+                //                                ;
+        //  }
 }

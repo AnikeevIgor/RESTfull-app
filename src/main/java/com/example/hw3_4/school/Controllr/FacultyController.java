@@ -3,6 +3,7 @@ package com.example.hw3_4.school.Controllr;
 
 
 import com.example.hw3_4.school.Model.Faculty;
+import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.Service.FacultyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +59,7 @@ public class FacultyController {
        return  ResponseEntity.ok(facultyService.findFacultiesByColorIgnoreCaseOrNameIgnoreCase(colorOrName));
    }
  // @GetMapping("/{id}/students")
- // public ResponseEntity<Collection<Student>> getStudentsByFaculty(@PathVariable long id){
+ // public ResponseEntity<Collection<Student>> getStudentsByFaculty(@PathVariable Long id){
  //     return  ResponseEntity.ok(facultyService.getStudentByFaculty(id));
  // }
 }

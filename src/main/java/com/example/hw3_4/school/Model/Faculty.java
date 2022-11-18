@@ -6,19 +6,19 @@ import java.util.List;
 @Entity
 public class Faculty {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private String name;
     private String color;
 
-  //  public List<Student> getStudents() {
-  //      return students;
-  //  }
+  // public List<Student> getStudents() {
+  //     return students;
+  // }
 
-  //  public void setStudents(List<Student> students) {
-  //      this.students = students;
-  //  }
+  // public void setStudents(List<Student> students) {
+  //     this.students = students;
+  // }
 
     @OneToMany(mappedBy = "faculty")
     private List<Student> students;

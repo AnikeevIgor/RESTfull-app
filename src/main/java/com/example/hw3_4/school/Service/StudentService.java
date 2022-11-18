@@ -12,11 +12,11 @@ import java.util.Collection;
 @Service
 public class StudentService {
     private final StudentRepo studentRepo;
-    private final FacultyRepo facultyRepo;
 
-    public StudentService(StudentRepo studentRepo, FacultyRepo facultyRepo) {
+
+    public StudentService(StudentRepo studentRepo) {
         this.studentRepo = studentRepo;
-        this.facultyRepo = facultyRepo;
+
     }
 
     public Student createStudent(Student student) {
@@ -43,8 +43,8 @@ public class StudentService {
         return studentRepo.findStudentByAgeIsBetween(min, max);
     }
 
-       public Faculty findStudentByFaculty(Long id){
-             return findStudent(id).getFaculty();
-       }
+     public Faculty findStudentByFaculty(Long id){
+           return findStudent(id).getFaculty();
+     }
 
 }

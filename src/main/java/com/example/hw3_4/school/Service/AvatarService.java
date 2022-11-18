@@ -22,18 +22,16 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 public class AvatarService {
     @Value("${student.avatar.dir.path}")
     private String avatarsDir;
-   private final AvatarRepo avatarRepo;
-   //private final   StudentRepo studentRepo;
+    private final AvatarRepo avatarRepo;
     private final StudentService studentService;
 
     public AvatarService(AvatarRepo avatarRepo, StudentService studentService) {
-        //this.studentRepo = studentRepo;
         this.avatarRepo = avatarRepo;
         this.studentService = studentService;
     }
 
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
-     Student student = studentService.findStudent(studentId);
+        Student student = studentService.findStudent(studentId);
 
         Path filePath = Path.of(avatarsDir, studentId + "." + getExtension(file.getOriginalFilename()));
         Files.createDirectories(filePath.getParent());
@@ -60,7 +58,7 @@ public class AvatarService {
     }
 
     public Avatar findAvatar(Long studentId) {
-        return AvatarRepo.findByStudentId(studentId).orElse(new Avatar());
+        return avatarRepo.findByStudentId(studentId).orElse(new Avatar());
     }
 
     public byte[] generateImagePreview(Path filePath) throws IOException {
