@@ -1,5 +1,5 @@
 select * from student
-where age between 3 and 9;
+where age between 1 and 3;
 
 select name from student;
 

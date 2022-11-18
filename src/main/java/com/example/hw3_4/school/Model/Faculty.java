@@ -12,9 +12,9 @@ public class Faculty {
     private String name;
     private String color;
 
-  // public List<Student> getStudents() {
-  //     return students;
-  // }
+   public List<Student> getStudents() {
+       return students;
+   }
 
   // public void setStudents(List<Student> students) {
   //     this.students = students;
