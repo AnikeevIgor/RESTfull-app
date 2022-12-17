@@ -1,5 +1,7 @@
 package com.example.hw3_4.school.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,7 @@ public class Avatar {
     private String mediaType;
     @Lob
     private byte[] data;
+
     @OneToOne
     @JoinColumn(name = "student_id")
     private Student student;

@@ -4,6 +4,7 @@ import com.example.hw3_4.school.Model.Avatar;
 import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.repositories.AvatarRepo;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -76,6 +78,11 @@ public class AvatarService {
             return baos.toByteArray();
 
         }
+    }
+
+    public List<Avatar> getAllAvatars(Integer pageNumber, Integer pageSize){
+        PageRequest pageRequest = PageRequest.of(pageNumber-1, pageSize);
+        return avatarRepo.findAll(pageRequest).getContent();
     }
 
 }

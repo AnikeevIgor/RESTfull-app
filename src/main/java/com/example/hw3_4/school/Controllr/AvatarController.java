@@ -2,10 +2,7 @@ package com.example.hw3_4.school.Controllr;
 
 import com.example.hw3_4.school.Model.Avatar;
 import com.example.hw3_4.school.Service.AvatarService;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 @RestController
 @RequestMapping("/avatar")
@@ -51,10 +49,20 @@ public class AvatarController {
 
         Path path= Path.of(avatar.getFilePath());
         try(InputStream is = Files.newInputStream(path);
-            OutputStream os = response.getOutputStream();) {
+            OutputStream os = response.getOutputStream()) {
             response.setContentType(avatar.getMediaType());
             response.setContentLength((int)avatar.getFileSize());
             is.transferTo(os);
         }
     }
+
+    @GetMapping()
+    public List<Avatar> getAllAvatars(@RequestParam("page") Integer pageNumber, @RequestParam("size") Integer pageSize){
+        return avatarService.getAllAvatars(pageNumber,pageSize);
+    }
+    @GetMapping(params = {"studentId"})
+    public Avatar findAvatar(@RequestParam Long studentId) {
+        return avatarService.findAvatar(studentId);
+    }
+
 }

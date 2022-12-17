@@ -1,6 +1,8 @@
 package com.example.hw3_4.school.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +13,9 @@ public class Student {
 
     private String name;
     private int age;
-
     @OneToOne
     private Avatar avatar;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;

@@ -1,5 +1,7 @@
 package com.example.hw3_4.school.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class Faculty {
   // public void setStudents(List<Student> students) {
   //     this.students = students;
   // }
-
+  @JsonManagedReference
     @OneToMany(mappedBy = "faculty")
     private List<Student> students;
 

@@ -3,11 +3,11 @@ package com.example.hw3_4.school.Service;
 
 import com.example.hw3_4.school.Model.Faculty;
 import com.example.hw3_4.school.Model.Student;
-import com.example.hw3_4.school.repositories.FacultyRepo;
 import com.example.hw3_4.school.repositories.StudentRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -47,4 +47,13 @@ public class StudentService {
            return findStudent(id).getFaculty();
      }
 
+     public Integer getStudentsByCategoryCount(){
+       return studentRepo.getStudentsByCategoryCount();
+     }
+     public Double getStudentsByCategoryAvg(){
+       return studentRepo.getStudentsByCategoryAvg();
+     }
+    public List<Student> getStudentsByCategoryLimit(){
+        return studentRepo.getStudentsByCategoryLimit();
+    }
 }
