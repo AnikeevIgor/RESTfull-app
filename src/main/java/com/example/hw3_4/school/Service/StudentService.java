@@ -43,17 +43,23 @@ public class StudentService {
         return studentRepo.findStudentByAgeIsBetween(min, max);
     }
 
-     public Faculty findStudentByFaculty(Long id){
-           return findStudent(id).getFaculty();
-     }
+    public Faculty findStudentByFaculty(Long id) {
+        return findStudent(id).getFaculty();
+    }
 
-     public Integer getStudentsByCategoryCount(){
-       return studentRepo.getStudentsByCategoryCount();
-     }
-     public Double getStudentsByCategoryAvg(){
-       return studentRepo.getStudentsByCategoryAvg();
-     }
-    public List<Student> getStudentsByCategoryLimit(){
+    public Integer getStudentsByCategoryCount() {
+        return studentRepo.getStudentsByCategoryCount();
+    }
+
+    public Double getStudentsByCategoryAvg() {
+        return studentRepo.getStudentsByCategoryAvg();
+    }
+
+    public List<Student> getStudentsByCategoryLimit() {
         return studentRepo.getStudentsByCategoryLimit();
+    }
+
+    public  List<Student> getStudentsByName(String name){
+        return studentRepo.getStudentsByName(name);
     }
 }

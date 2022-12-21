@@ -4,11 +4,11 @@ package com.example.hw3_4.school.Service;
 import com.example.hw3_4.school.Model.Faculty;
 import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.repositories.FacultyRepo;
-import com.example.hw3_4.school.repositories.StudentRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.List;
+
 
 
 @Service
@@ -46,5 +46,9 @@ public class FacultyService {
     }
    public Collection<Student> getStudentByFaculty(Long id){
             return  findFaculty(id).getStudents();
+   }
+
+   public List<Faculty> getFacultiesByNameAndColor(String name, String color){
+        return facultyRepo.getFacultiesByNameAndColor(name,color);
    }
 }

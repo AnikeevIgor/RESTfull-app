@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("faculty")
@@ -62,4 +63,9 @@ public class FacultyController {
   public ResponseEntity<Collection<Student>> getStudentsByFaculty(@PathVariable Long id){
       return  ResponseEntity.ok(facultyService.getStudentByFaculty(id));
   }
+
+    @GetMapping("/faculties/name and color/{name},{color}")
+    public List<Faculty> getFacultiesByNameAndColor(@PathVariable("name") String name,@PathVariable("color") String color){
+        return facultyService.getFacultiesByNameAndColor(name,color);
+    }
 }

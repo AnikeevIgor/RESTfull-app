@@ -5,13 +5,10 @@ import com.example.hw3_4.school.Model.Faculty;
 import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.Service.StudentService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 
 @RestController
@@ -66,5 +63,10 @@ public class StudentController {
        @GetMapping("/{id}/faculty")
        public ResponseEntity<Faculty> findStudentByFaculty(@PathVariable Long id) {
            return ResponseEntity.ok(studentService.findStudentByFaculty(id));
+       }
+
+       @GetMapping("/students/name/{name}")
+    public List<Student> getStudentsByName(@PathVariable("name") String name){
+        return studentService.getStudentsByName(name);
        }
 }
