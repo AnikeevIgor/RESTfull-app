@@ -3,6 +3,8 @@ package com.example.hw3_4.school.Service;
 import com.example.hw3_4.school.Model.Avatar;
 import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.repositories.AvatarRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Service
 @Transactional
 public class AvatarService {
+
+    Logger logger = LoggerFactory.getLogger(AvatarService.class);
+
     @Value("${student.avatar.dir.path}")
     private String avatarsDir;
     private final AvatarRepo avatarRepo;
@@ -33,6 +38,7 @@ public class AvatarService {
     }
 
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
+        logger.debug("Was invoked method for uploadAvatar");
         Student student = studentService.findStudent(studentId);
 
         Path filePath = Path.of(avatarsDir, studentId + "." + getExtension(file.getOriginalFilename()));
@@ -60,6 +66,7 @@ public class AvatarService {
     }
 
     public Avatar findAvatar(Long studentId) {
+        logger.debug("Was invoked method for findAvatar");
         return avatarRepo.findByStudentId(studentId).orElse(new Avatar());
     }
 
@@ -81,6 +88,7 @@ public class AvatarService {
     }
 
     public List<Avatar> getAllAvatars(Integer pageNumber, Integer pageSize){
+        logger.debug("Was invoked method for  getAllAvatars");
         PageRequest pageRequest = PageRequest.of(pageNumber-1, pageSize);
         return avatarRepo.findAll(pageRequest).getContent();
     }
