@@ -8,9 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
+import static liquibase.pro.packaged.nT.b;
+import static org.apache.coyote.http11.Constants.a;
 
 
 @Service
@@ -50,15 +55,31 @@ public class FacultyService {
 
     public Collection<Faculty> findFacultiesByColorIgnoreCaseOrNameIgnoreCase(String colorOrName) {
         logger.debug("Was invoked method for findFacultiesByColorIgnoreCaseOrNameIgnoreCase");
-        return facultyRepo.findFacultiesByColorIgnoreCaseOrNameIgnoreCase(colorOrName,colorOrName);
+        return facultyRepo.findFacultiesByColorIgnoreCaseOrNameIgnoreCase(colorOrName, colorOrName);
     }
-   public Collection<Student> getStudentByFaculty(Long id){
-       logger.debug("Was invoked method for getStudentByFaculty");
-            return  findFaculty(id).getStudents();
-   }
 
-   public List<Faculty> getFacultiesByNameAndColor(String name, String color){
-       logger.debug("Was invoked method for getFacultiesByNameAndColor");
-        return facultyRepo.getFacultiesByNameAndColor(name,color);
-   }
+    public Collection<Student> getStudentByFaculty(Long id) {
+        logger.debug("Was invoked method for getStudentByFaculty");
+        return findFaculty(id).getStudents();
+    }
+
+    public List<Faculty> getFacultiesByNameAndColor(String name, String color) {
+        logger.debug("Was invoked method for getFacultiesByNameAndColor");
+        return facultyRepo.getFacultiesByNameAndColor(name, color);
+    }
+
+    public String getFacultyLongName() {
+        List<Faculty> faculties = new ArrayList<>(facultyRepo.findAll());
+        return faculties.stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparing(String::length))
+                        .get();
+
+    }
+
+    public Integer getParallel() {
+        return Stream.iterate(1, a -> a + 1)
+                .limit(1_000_000)
+                .reduce(0, (a, b) -> a + b );
+    }
 }

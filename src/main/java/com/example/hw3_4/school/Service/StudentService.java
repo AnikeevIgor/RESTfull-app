@@ -4,12 +4,15 @@ package com.example.hw3_4.school.Service;
 import com.example.hw3_4.school.Model.Faculty;
 import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.repositories.StudentRepo;
+import liquibase.pro.packaged.S;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -73,8 +76,26 @@ public class StudentService {
         return studentRepo.getStudentsByCategoryLimit();
     }
 
-    public  List<Student> getStudentsByName(String name){
+    public List<Student> getStudentsByName(String name) {
         logger.debug("Was invoked method for getStudentsByName");
         return studentRepo.getStudentsByName(name);
     }
+
+    public List<String> getStudentsByNameA() {
+        List<Student> students = new ArrayList<>(studentRepo.findAll());
+       return students.stream()
+                .map(Student::getName)
+                .filter(s -> s.startsWith("A"))
+                .sorted(String::compareTo)
+                .collect(Collectors.toList());
+    }
+
+    public Double getStudentsMidlAge() {
+        List<Student> students = new ArrayList<>(studentRepo.findAll());
+         return students.stream()
+                 .mapToInt(Student::getAge)
+                 .average()
+                 .getAsDouble();
+    }
+
 }

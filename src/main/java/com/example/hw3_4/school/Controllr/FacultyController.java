@@ -68,4 +68,14 @@ public class FacultyController {
     public List<Faculty> getFacultiesByNameAndColor(@PathVariable("name") String name,@PathVariable("color") String color){
         return facultyService.getFacultiesByNameAndColor(name,color);
     }
+
+    @GetMapping("/faculties/name/long")
+    public String getFacultyLongName(){
+        return facultyService.getFacultyLongName();
+    }
+
+    @GetMapping("/faculties/par")
+    public Integer getParallel(){
+        return facultyService.getParallel();
+    }
 }

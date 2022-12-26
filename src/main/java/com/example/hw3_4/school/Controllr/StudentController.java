@@ -69,4 +69,14 @@ public class StudentController {
     public List<Student> getStudentsByName(@PathVariable("name") String name){
         return studentService.getStudentsByName(name);
        }
+
+       @GetMapping("/students/name/A")
+    public List<String> getStudentsNameA(){
+        return studentService.getStudentsByNameA();
+    }
+
+    @GetMapping("/students/mid/age")
+    public Double getStudentsMidAge(){
+        return studentService.getStudentsMidlAge();
+    }
 }
