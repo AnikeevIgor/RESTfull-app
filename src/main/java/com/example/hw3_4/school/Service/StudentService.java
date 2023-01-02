@@ -4,15 +4,16 @@ package com.example.hw3_4.school.Service;
 import com.example.hw3_4.school.Model.Faculty;
 import com.example.hw3_4.school.Model.Student;
 import com.example.hw3_4.school.repositories.StudentRepo;
-import liquibase.pro.packaged.S;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @Service
 public class StudentService {
@@ -83,7 +84,7 @@ public class StudentService {
 
     public List<String> getStudentsByNameA() {
         List<Student> students = new ArrayList<>(studentRepo.findAll());
-       return students.stream()
+        return students.stream()
                 .map(Student::getName)
                 .filter(s -> s.startsWith("A"))
                 .sorted(String::compareTo)
@@ -92,10 +93,48 @@ public class StudentService {
 
     public Double getStudentsMidlAge() {
         List<Student> students = new ArrayList<>(studentRepo.findAll());
-         return students.stream()
-                 .mapToInt(Student::getAge)
-                 .average()
-                 .getAsDouble();
+        return students.stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .getAsDouble();
+    }
+
+    public void getThreadOne() {
+        List<Student> students = new ArrayList<>(studentRepo.findAll(PageRequest.of(0, 6)).getContent());
+
+        SOUTOne(students.subList(0, 2));
+        new Thread(() ->
+                SOUTOne(students.subList(2, 4)))
+                .start();
+        new Thread(() ->
+                SOUTOne(students.subList(4, 6)))
+                .start();
+    }
+
+    public void SOUTOne(List<Student> students) {
+        for (Student student : students) {
+            System.out.println(student.getName());
+        }
+    }
+
+        public void getThreadSynchronized () {
+            List<Student> studentss = new ArrayList<>(studentRepo.findAll(PageRequest.of(0, 6)).getContent());
+
+
+            SOUTTwo(studentss.subList(0, 2));
+            new Thread(() ->
+                    SOUTTwo(studentss.subList(2, 4)))
+                    .start();
+            new Thread(() ->
+                    SOUTTwo(studentss.subList(4, 6)))
+                    .start();
+
+        }
+
+    private synchronized void SOUTTwo(List<Student> studentss) {
+        for (Student student : studentss) {
+            System.out.println(student.getName());
+        }
     }
 
 }

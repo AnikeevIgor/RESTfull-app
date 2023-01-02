@@ -79,4 +79,14 @@ public class StudentController {
     public Double getStudentsMidAge(){
         return studentService.getStudentsMidlAge();
     }
+
+    @GetMapping("students/name/stream")
+    public void getStudentsNameStream(){
+        studentService.getThreadOne();
+    }
+
+    @GetMapping("students/name/stream/synchronized")
+    public void getStudentsNameStreamSynchronized(){
+        studentService.getThreadSynchronized();
+    }
 }
