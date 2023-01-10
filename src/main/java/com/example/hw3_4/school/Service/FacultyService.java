@@ -14,15 +14,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static liquibase.pro.packaged.nT.b;
-import static org.apache.coyote.http11.Constants.a;
-
-
 @Service
 public class FacultyService {
     private final FacultyRepo facultyRepo;
 
-    Logger logger = LoggerFactory.getLogger(FacultyService.class);
+   private final Logger logger = LoggerFactory.getLogger(FacultyService.class);
 
     public FacultyService(FacultyRepo facultyRepo) {
         this.facultyRepo = facultyRepo;
@@ -52,22 +48,22 @@ public class FacultyService {
         logger.debug("Was invoked method for getAllFaculty");
         return facultyRepo.findAll();
     }
-
+/* поиска факультета по имени или цвету, игнорируя регистр */
     public Collection<Faculty> findFacultiesByColorIgnoreCaseOrNameIgnoreCase(String colorOrName) {
         logger.debug("Was invoked method for findFacultiesByColorIgnoreCaseOrNameIgnoreCase");
         return facultyRepo.findFacultiesByColorIgnoreCaseOrNameIgnoreCase(colorOrName, colorOrName);
     }
-
+/* Получить студентов факультета */
     public Collection<Student> getStudentByFaculty(Long id) {
         logger.debug("Was invoked method for getStudentByFaculty");
         return findFaculty(id).getStudents();
     }
-
+    /* Поиск по названию и цвету факультета */
     public List<Faculty> getFacultiesByNameAndColor(String name, String color) {
         logger.debug("Was invoked method for getFacultiesByNameAndColor");
         return facultyRepo.getFacultiesByNameAndColor(name, color);
     }
-
+/* Возвращать самое длинное название факультета */
     public String getFacultyLongName() {
         List<Faculty> faculties = new ArrayList<>(facultyRepo.findAll());
         return faculties.stream()

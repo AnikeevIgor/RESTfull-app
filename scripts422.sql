@@ -27,8 +27,8 @@ INNER JOIN car ON people.car_id=car.id ;
 
 select student.name,student.age,faculty.name
 from student
-INNER JOIN faculty on student.faculty_id = faculty.id ;
+LEFT JOIN faculty on student.faculty_id = faculty.id ;
 
 select student.name,avatar.file_path
 from student
-RIGHT JOIN  avatar on student.avatar_id = avatar.student_id ;
+INNER JOIN  avatar on student.avatar_id = avatar.student_id ;

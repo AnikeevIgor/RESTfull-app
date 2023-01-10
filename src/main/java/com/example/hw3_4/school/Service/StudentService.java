@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class StudentService {
     private final StudentRepo studentRepo;
 
-    Logger logger = LoggerFactory.getLogger(StudentService.class);
+  private final Logger logger = LoggerFactory.getLogger(StudentService.class);
 
 
     public StudentService(StudentRepo studentRepo) {
@@ -51,12 +51,12 @@ public class StudentService {
         logger.debug("Was invoked method for getAllStudents");
         return studentRepo.findAll();
     }
-
+/* Возвращает студентов, у которых возраст попадает в заданные границы */
     public Collection<Student> findStudentByAgeIsBetween(int min, int max) {
         logger.debug("Was invoked method for findStudentByAgeIsBetween");
         return studentRepo.findStudentByAgeIsBetween(min, max);
     }
-
+    /* Получить факультет студента */
     public Faculty findStudentByFaculty(Long id) {
         logger.debug("Was invoked method for findStudentByFaculty");
         return findStudent(id).getFaculty();
@@ -76,12 +76,12 @@ public class StudentService {
         logger.debug("Was invoked method for getStudentsByCategoryLimit");
         return studentRepo.getStudentsByCategoryLimit();
     }
-
+    /* Поиск по имени студента */
     public List<Student> getStudentsByName(String name) {
         logger.debug("Was invoked method for getStudentsByName");
         return studentRepo.getStudentsByName(name);
     }
-
+/* Получение всех имен всех студентов, чье имя начинается с буквы А */
     public List<String> getStudentsByNameA() {
         List<Student> students = new ArrayList<>(studentRepo.findAll());
         return students.stream()
@@ -90,7 +90,7 @@ public class StudentService {
                 .sorted(String::compareTo)
                 .collect(Collectors.toList());
     }
-
+/* возвращать средний возраст всех студентов */
     public Double getStudentsMidlAge() {
         List<Student> students = new ArrayList<>(studentRepo.findAll());
         return students.stream()
@@ -98,41 +98,41 @@ public class StudentService {
                 .average()
                 .getAsDouble();
     }
-
+    /* запускает два параллельных потока для вывода имен студентов в консоль. */
     public void getThreadOne() {
         List<Student> students = new ArrayList<>(studentRepo.findAll(PageRequest.of(0, 6)).getContent());
 
-        SOUTOne(students.subList(0, 2));
+        printStudents(students.subList(0, 2));
         new Thread(() ->
-                SOUTOne(students.subList(2, 4)))
+                printStudents(students.subList(2, 4)))
                 .start();
         new Thread(() ->
-                SOUTOne(students.subList(4, 6)))
+                printStudents(students.subList(4, 6)))
                 .start();
     }
 
-    public void SOUTOne(List<Student> students) {
+    public void printStudents(List<Student> students) {
         for (Student student : students) {
             System.out.println(student.getName());
         }
     }
-
+/* запускает два синхронизированных параллельных потока для вывода имен студентов в консоль */
         public void getThreadSynchronized () {
-            List<Student> studentss = new ArrayList<>(studentRepo.findAll(PageRequest.of(0, 6)).getContent());
+            List<Student> students = new ArrayList<>(studentRepo.findAll(PageRequest.of(0, 6)).getContent());
 
 
-            SOUTTwo(studentss.subList(0, 2));
+            printStudentsSynchronized(students.subList(0, 2));
             new Thread(() ->
-                    SOUTTwo(studentss.subList(2, 4)))
+                    printStudentsSynchronized(students.subList(2, 4)))
                     .start();
             new Thread(() ->
-                    SOUTTwo(studentss.subList(4, 6)))
+                    printStudentsSynchronized(students.subList(4, 6)))
                     .start();
 
         }
 
-    private synchronized void SOUTTwo(List<Student> studentss) {
-        for (Student student : studentss) {
+    private synchronized void printStudentsSynchronized(List<Student> students) {
+        for (Student student : students) {
             System.out.println(student.getName());
         }
     }

@@ -4,13 +4,11 @@ package com.example.hw3_4.school.repositories;
 import com.example.hw3_4.school.Model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.Collection;
 import java.util.List;
 
 public interface StudentRepo extends JpaRepository<Student, Long> {
 
-    Collection<Student> findStudentByAgeIsBetween(int min, int max);
+    List<Student> findStudentByAgeIsBetween(int min, int max);
 
    Student getById(Long studentId);
 
@@ -24,5 +22,4 @@ public interface StudentRepo extends JpaRepository<Student, Long> {
     List<Student> getStudentsByCategoryLimit();
 
      List<Student> getStudentsByName(String name);
-
 }

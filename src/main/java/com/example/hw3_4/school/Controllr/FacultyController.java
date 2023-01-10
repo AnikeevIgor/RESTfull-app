@@ -50,7 +50,7 @@ public class FacultyController {
          facultyService.deleteFaculty(id);
          return ResponseEntity.ok().build();
     }
-    @GetMapping
+    @GetMapping("faculties/all")
     public ResponseEntity<Collection<Faculty>> getAllFaculty(){
         return  ResponseEntity.ok(facultyService.getAllFaculty());
     }
@@ -64,7 +64,7 @@ public class FacultyController {
       return  ResponseEntity.ok(facultyService.getStudentByFaculty(id));
   }
 
-    @GetMapping("/faculties/name and color/{name},{color}")
+    @GetMapping("/faculties/nameAndColor/{name},{color}")
     public List<Faculty> getFacultiesByNameAndColor(@PathVariable("name") String name,@PathVariable("color") String color){
         return facultyService.getFacultiesByNameAndColor(name,color);
     }

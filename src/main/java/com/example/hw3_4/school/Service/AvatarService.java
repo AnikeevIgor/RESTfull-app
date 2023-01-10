@@ -25,7 +25,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Transactional
 public class AvatarService {
 
-    Logger logger = LoggerFactory.getLogger(AvatarService.class);
+   private final Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
     @Value("${student.avatar.dir.path}")
     private String avatarsDir;
@@ -36,7 +36,7 @@ public class AvatarService {
         this.avatarRepo = avatarRepo;
         this.studentService = studentService;
     }
-
+    /* Загрузка изображения */
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
         logger.debug("Was invoked method for uploadAvatar");
         Student student = studentService.findStudent(studentId);
@@ -69,7 +69,7 @@ public class AvatarService {
         logger.debug("Was invoked method for findAvatar");
         return avatarRepo.findByStudentId(studentId).orElse(new Avatar());
     }
-
+/* Поулчить превью картинки */
     public byte[] generateImagePreview(Path filePath) throws IOException {
         try (InputStream is = Files.newInputStream(filePath);
              BufferedInputStream bis = new BufferedInputStream(is, 1024);
