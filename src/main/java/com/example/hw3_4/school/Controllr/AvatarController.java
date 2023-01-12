@@ -55,7 +55,7 @@ public class AvatarController {
             is.transferTo(os);
         }
     }
-
+/* */
     @GetMapping("avatars/byPage")
     public List<Avatar> getAllAvatars(@RequestParam("page") Integer pageNumber, @RequestParam("size") Integer pageSize){
         return avatarService.getAllAvatars(pageNumber,pageSize);
