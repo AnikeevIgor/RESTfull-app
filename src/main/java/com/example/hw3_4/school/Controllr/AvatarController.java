@@ -42,7 +42,7 @@ public class AvatarController {
 
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
     }
-/* fwaf*/
+/* AYF*/
     @GetMapping(value = "/{id}/avatar-from-file")
     public void downloadAvatar(@PathVariable Long id, HttpServletResponse response) throws IOException{
         Avatar avatar = avatarService.findAvatar(id);
@@ -55,7 +55,7 @@ public class AvatarController {
             is.transferTo(os);
         }
     }
-/* */
+
     @GetMapping("avatars/byPage")
     public List<Avatar> getAllAvatars(@RequestParam("page") Integer pageNumber, @RequestParam("size") Integer pageSize){
         return avatarService.getAllAvatars(pageNumber,pageSize);
